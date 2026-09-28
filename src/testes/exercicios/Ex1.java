@@ -13,24 +13,28 @@ public class Ex1 {
 
 	public static void main(String[] args) {
 
-		Scanner input = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 
-		double somaAltura = 0;
+		double altura = 0.0;
+		double somaAltura = 0.0;
 		int contador = 0;
-
-		double altura;
+				
 		while (true) {
-			contador++;
+						
 			System.out.println("Insira a altura");
-			altura = input.nextDouble();
+			altura = sc.nextDouble();
+			
 			if (altura > 0) {
-				somaAltura++;
+				contador++;
+				somaAltura += altura;
 			} else {
 				break;
 			}
 		}
 
-		double media = altura / contador;
+		sc.close();
+		
+		double media = somaAltura / contador;
 
 		System.out.println("Média de altura: " + media + " metros");
 	}
