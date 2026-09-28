@@ -15,14 +15,17 @@ import java.util.Scanner;
 public class Ex2 {
 	public static void main(String[] args) {
 
-		Scanner input = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 
-		int[] numeros = new int[5];
+		Integer[] numeros = new Integer[5];
 
 		System.out.println("Digite 5 números:");
-		for (int i = 0; i <= numeros.length; i++) {
+		
+		for (Integer i = 0; i < numeros.length; i++) {
+			
 			System.out.print("Número " + (i) + ": ");
-			numeros[i] = input.nextInt();
+			numeros[i] = sc.nextInt();
+			
 		}
 
 		int maior = 0;
@@ -32,16 +35,21 @@ public class Ex2 {
 		maior = numeros[0];
 		menor = numeros[0];
 
-		for (int num : numeros) {
+		for (Integer num : numeros) {
+			
 			if (num > maior) {
 				maior = num;
 			}
+			
 			if (num < menor) {
-				maior = num;
+				menor = num;
 			}
+			
 			soma += num;
 		}
 
+		sc.close();
+		
 		double media = soma / numeros.length;
 
 		System.out.println("Maior número: " + maior);
