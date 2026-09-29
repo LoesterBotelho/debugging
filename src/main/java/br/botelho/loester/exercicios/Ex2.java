@@ -1,60 +1,59 @@
 package br.botelho.loester.exercicios;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Exercício 2)
- * <br>
- * Crie uma array de 5 elementos e descubra:
- * <br>
- * a) Qual o maior elemento
- * <br>
- * b) Qual o menor elemento
- * <br>
- * c) A média dos elementos
- */
 public class Ex2 {
-	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
+    public void executar(Scanner scanner) {
 
-		Integer[] numeros = new Integer[5];
+        Integer[] numeros = new Integer[5];
 
-		System.out.println("Digite 5 números:");
-		
-		for (Integer i = 0; i < numeros.length; i++) {
-			
-			System.out.print("Número " + (i) + ": ");
-			numeros[i] = sc.nextInt();
-			
-		}
+        System.out.println("Digite 5 números:");
 
-		int maior = 0;
-		int menor = 0;
-		int soma = 0;
+        for (int i = 0; i < numeros.length; i++) {
 
-		maior = numeros[0];
-		menor = numeros[0];
+            while (true) {
 
-		for (Integer num : numeros) {
-			
-			if (num > maior) {
-				maior = num;
-			}
-			
-			if (num < menor) {
-				menor = num;
-			}
-			
-			soma += num;
-		}
+                try {
 
-		sc.close();
-		
-		double media = soma / numeros.length;
+                    System.out.print("Número " + (i + 1) + ": ");
 
-		System.out.println("Maior número: " + maior);
-		System.out.println("Menor número: " + menor);
-		System.out.println("Media dos números: " + media);
+                    numeros[i] = scanner.nextInt();
 
-	}
+                    break;
+
+                } catch (InputMismatchException e) {
+
+                    System.out.println("Entrada inválida. Informe um número inteiro.");
+
+                    scanner.next();
+                }
+            }
+        }
+
+        int maior = numeros[0];
+        int menor = numeros[0];
+        int soma = 0;
+
+        for (Integer numero : numeros) {
+
+            if (numero > maior) {
+                maior = numero;
+            }
+
+            if (numero < menor) {
+                menor = numero;
+            }
+
+            soma += numero;
+        }
+
+        double media = (double) soma / numeros.length;
+
+        System.out.println("Maior número: " + maior);
+        System.out.println("Menor número: " + menor);
+        System.out.println("Soma dos números: " + soma);
+        System.out.println("Média dos números: " + media);
+    }
 }

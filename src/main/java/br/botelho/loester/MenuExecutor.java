@@ -3,6 +3,7 @@ package br.botelho.loester;
 import java.util.Scanner;
 
 import br.botelho.loester.exercicios.Ex1;
+import br.botelho.loester.exercicios.Ex2;
 
 public class MenuExecutor {
 
@@ -65,6 +66,8 @@ public class MenuExecutor {
     private void executarExercicio2() {
     	System.out.println(divisoria);
         System.out.println("Executando Exercício 2...\n");
+        Ex2 ex2 = new Ex2();
+        ex2.executar(scanner);
     }
 
     private void executarExercicio3() {
