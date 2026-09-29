@@ -1,0 +1,8 @@
+services:
+
+  debugging:
+    image: loesterbotelho/debugging:1.0.0
+    container_name: debugging-container
+
+    stdin_open: true
+    tty: true

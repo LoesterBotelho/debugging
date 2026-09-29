@@ -1,0 +1,13 @@
+@echo off
+
+set DOCKER_USER=loesterbotelho
+
+set IMAGE_NAME=debugging
+set IMAGE_VERSION=1.0.0
+
+set IMAGE=%DOCKER_USER%/%IMAGE_NAME%:%IMAGE_VERSION%
+
+set CONTAINER_NAME=debugging
+
+set HOST_PORT=8080
+set CONTAINER_PORT=8080
