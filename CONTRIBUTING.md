@@ -1,83 +1,55 @@
-# Guia de Contribuição
+# CONTRIBUTING.md — Guia de Contribuição
 
-Obrigado por contribuir com o projeto **debugging**.
+Este documento define as boas práticas para desenvolvimento, testes, commits, branches e Pull Requests em projetos Java.
 
-Este documento define as convenções utilizadas no projeto para desenvolvimento, organização de branches, commits, testes e manutenção do código.
-
-O objetivo é manter um histórico Git organizado e uma estrutura de código consistente, facilitando o aprendizado e a evolução do projeto.
+O objetivo é manter o código organizado, testável, seguro e fácil de manter.
 
 ---
 
-## 1. Sobre o projeto
+## 1. Tecnologias
 
-O projeto **debugging** é uma aplicação Java desenvolvida para estudos práticos de:
+O projeto utiliza:
 
-* Java 25
+* Java
 * Maven
-* JUnit 6
+* JUnit
 * Mockito
-* Testes unitários
-* Testes de integração
-* Testes de regressão
-* Debugging
-* Refatoração
-* Boas práticas de desenvolvimento
-* Git e GitHub
 
-A aplicação possui uma interface de console para execução dos exercícios.
+As versões utilizadas devem ser consultadas diretamente no arquivo `pom.xml`.
 
 ---
 
-## 2. Tecnologias
+## 2. Estrutura do Projeto
 
-| Tecnologia | Versão  |
-| ---------- | ------- |
-| Java       | 25      |
-| Maven      | 3.x     |
-| JUnit      | 6.0.0   |
-| Mockito    | 5.20.0  |
-| H2         | 2.3.232 |
-
----
-
-## 3. Estrutura do projeto
+O projeto deve seguir, preferencialmente, a estrutura padrão do Maven:
 
 ```text
-debugging/
+projeto/
+├── pom.xml
 ├── README.md
 ├── CONTRIBUTING.md
-├── pom.xml
 └── src/
     ├── main/
     │   └── java/
-    │       └── br/
-    │           └── botelho/
-    │               └── loester/
-    │                   ├── MainClasse.java
-    │                   ├── MenuExecutor.java
-    │                   └── exercicios/
-    │                       ├── Ex1.java
-    │                       ├── Ex2.java
-    │                       └── Ex3.java
-    │
+    │       └── ...
     └── test/
         └── java/
-            └── br/
-                └── botelho/
-                    └── loester/
+            └── ...
 ```
+
+### `src/main/java`
+
+Contém o código-fonte da aplicação.
+
+### `src/test/java`
+
+Contém os testes automatizados.
 
 ---
 
-## 4. Pré-requisitos
+## 3. Pré-requisitos
 
-Para executar o projeto, é necessário possuir:
-
-* Java 25
-* Maven
-* Git
-
-Verifique as instalações:
+Antes de iniciar o desenvolvimento, verifique se estão instalados:
 
 ```bash
 java -version
@@ -85,11 +57,11 @@ mvn -version
 git --version
 ```
 
+As versões esperadas de Java, Maven e das bibliotecas devem ser verificadas no `pom.xml`.
+
 ---
 
-## 5. Clonando o projeto
-
-Clone o repositório:
+## 4. Clonar o Projeto
 
 ```bash
 git clone <URL_DO_REPOSITORIO>
@@ -98,12 +70,12 @@ git clone <URL_DO_REPOSITORIO>
 Entre no diretório:
 
 ```bash
-cd debugging
+cd <NOME_DO_PROJETO>
 ```
 
 ---
 
-## 6. Executando o projeto
+## 5. Compilação
 
 Para compilar o projeto:
 
@@ -111,173 +83,81 @@ Para compilar o projeto:
 mvn clean compile
 ```
 
-Para executar os testes:
+O comando `clean` remove arquivos gerados anteriormente.
+
+O comando `compile` compila o código-fonte da aplicação.
+
+---
+
+## 6. Testes
+
+Execute todos os testes automatizados:
 
 ```bash
 mvn test
 ```
 
-Para empacotar a aplicação:
+Antes de criar um Pull Request, todos os testes devem ser executados com sucesso.
+
+---
+
+## 7. Empacotamento
+
+Para gerar o artefato da aplicação:
 
 ```bash
 mvn clean package
 ```
 
-O arquivo `.jar` será gerado no diretório:
+O arquivo gerado normalmente estará no diretório:
 
 ```text
 target/
 ```
 
----
-
-## 7. Executando o JAR
-
-Após executar:
+Caso o projeto gere um arquivo JAR executável:
 
 ```bash
-mvn clean package
+java -jar target/<ARQUIVO>.jar
 ```
 
-o JAR poderá ser executado utilizando:
+---
+
+# 8. Branches
+
+As branches devem representar claramente o objetivo da alteração.
+
+Exemplos:
+
+```text
+feature/nova-funcionalidade
+fix/correcao-de-bug
+refactor/refatoracao
+test/adicionar-testes
+docs/atualizar-documentacao
+chore/atualizacao-configuracao
+```
+
+Evite utilizar diretamente a branch principal para desenvolver funcionalidades ou correções.
+
+---
+
+# 9. Criando uma Branch
+
+Antes de criar uma nova branch, atualize a branch principal:
 
 ```bash
-java -jar target/debugging-1.0.0.jar
+git checkout main
+git pull origin main
 ```
 
----
+Crie uma nova branch:
 
-# 8. Organização de Branches
-
-As branches devem utilizar nomes em:
-
-* letras minúsculas;
-* palavras separadas por hífen;
-* prefixo indicando o objetivo da alteração.
-
-### Exemplos
-
-```text
-feat/menu-console
-feat/exercicio-1
-feat/exercicio-2
-
-fix/calculo-media
-fix/validacao-entrada
-
-hotfix/erro-inicializacao
-
-refactor/menu-executor
-
-test/exercicio-1
-test/exercicio-2
-
-build/configuracao-maven
-
-perf/calculo-temperatura
-
-docs/readme
-
-ci/github-actions
+```bash
+git checkout -b refactor/exercicio-1
 ```
 
----
-
-## 9. Tipos de Branch
-
-### `feat`
-
-Utilizada para desenvolvimento de novas funcionalidades.
-
-```text
-feat/menu-console
-```
-
-Exemplo:
-
-```text
-feat/exercicio-4
-```
-
----
-
-### `fix`
-
-Utilizada para correção de bugs durante o desenvolvimento.
-
-```text
-fix/calculo-media
-```
-
----
-
-### `hotfix`
-
-Utilizada para correções urgentes em uma versão já publicada ou em produção.
-
-```text
-hotfix/erro-inicializacao
-```
-
----
-
-### `refactor`
-
-Utilizada quando o código é reorganizado sem alterar seu comportamento esperado.
-
-```text
-refactor/menu-executor
-```
-
----
-
-### `test`
-
-Utilizada para criação ou alteração de testes.
-
-```text
-test/exercicio-1
-```
-
----
-
-### `build`
-
-Utilizada para alterações relacionadas ao processo de build, dependências ou configuração do Maven.
-
-```text
-build/dependencias
-```
-
----
-
-### `perf`
-
-Utilizada para alterações cujo objetivo é melhorar desempenho.
-
-```text
-perf/calculo-temperatura
-```
-
----
-
-### `docs`
-
-Utilizada para documentação.
-
-```text
-docs/readme
-```
-
----
-
-### `ci`
-
-Utilizada para alterações relacionadas à integração e entrega contínuas.
-
-```text
-ci/github-actions
-```
+A partir desse momento, o desenvolvimento deve ser realizado nessa branch.
 
 ---
 
@@ -289,326 +169,347 @@ Os commits devem seguir o padrão:
 tipo: descrição
 ```
 
-A descrição deve ser curta, objetiva e representar a alteração realizada.
+Exemplos:
+
+```text
+feat: adicionar nova funcionalidade
+fix: corrigir cálculo da média
+refactor: reorganizar classe de serviço
+test: adicionar testes unitários
+docs: atualizar documentação
+chore: atualizar configuração do projeto
+```
+
+## Principais tipos
+
+| Tipo       | Utilização                               |
+| ---------- | ---------------------------------------- |
+| `feat`     | Nova funcionalidade                      |
+| `fix`      | Correção de bug                          |
+| `refactor` | Refatoração sem mudança de comportamento |
+| `test`     | Criação ou alteração de testes           |
+| `docs`     | Documentação                             |
+| `chore`    | Tarefas de manutenção                    |
+| `build`    | Alterações no processo de build          |
+| `ci`       | Alterações em integração contínua        |
 
 ---
 
-## 11. Tipos de Commit
+# 11. Fluxo de Desenvolvimento
 
-### `feat`
+O fluxo recomendado é:
 
-Nova funcionalidade.
-
-```text
-feat: adiciona menu console
-```
-
-### `fix`
-
-Correção de bug.
-
-```text
-fix: corrige cálculo da média
-```
-
-### `hotfix`
-
-Correção urgente.
-
-```text
-hotfix: corrige erro de inicialização do jar
-```
-
-### `refactor`
-
-Refatoração sem alteração de comportamento.
-
-```text
-refactor: separa execução dos exercícios do menu
-```
-
-### `test`
-
-Criação ou alteração de testes.
-
-```text
-test: adiciona testes unitários do exercício 1
-```
-
-### `build`
-
-Alterações de build ou dependências.
-
-```text
-build: adiciona junit 6 e mockito
-```
-
-### `chore`
-
-Tarefas de manutenção que não alteram diretamente a funcionalidade da aplicação.
-
-```text
-chore: atualiza configuração do projeto
-```
-
-### `perf`
-
-Melhorias de desempenho.
-
-```text
-perf: otimiza cálculo das temperaturas
-```
-
-### `docs`
-
-Alterações na documentação.
-
-```text
-docs: atualiza instruções de execução
-```
-
-### `style`
-
-Alterações exclusivamente relacionadas à formatação.
-
-```text
-style: ajusta formatação das classes
-```
-
-### `ci`
-
-Alterações relacionadas à integração contínua.
-
-```text
-ci: adiciona workflow de testes
-```
-
----
-
-# 12. Exemplos de Commits
-
-Exemplos válidos:
-
-```text
-feat: adiciona menu principal da aplicação
-
-feat: adiciona execução do exercício 1 pelo menu
-
-fix: corrige cálculo da média dos números
-
-refactor: remove métodos main dos exercícios
-
-test: adiciona testes unitários para exercício 1
-
-test: adiciona teste de regressão para cálculo da média
-
-build: configura junit 6 e mockito
-
-docs: adiciona documentação de contribuição
-```
-
-Evite commits genéricos:
-
-```text
-alterações
-mudanças
-teste
-ajustes
-update
-final
-final2
-corrigido
-```
-
-Prefira descrever exatamente o que foi alterado.
-
----
-
-# 13. Fluxo de Desenvolvimento
-
-Antes de iniciar uma alteração:
+### 1. Atualizar a branch principal
 
 ```bash
 git checkout main
-git pull
+git pull origin main
 ```
 
-Crie uma nova branch:
+### 2. Criar uma branch
 
 ```bash
-git checkout -b feat/nova-funcionalidade
+git checkout -b refactor/exercicio-1
 ```
 
-Faça as alterações necessárias.
+### 3. Desenvolver
 
-Verifique o projeto:
+Realize as alterações necessárias no código.
 
-```bash
-mvn clean test
-```
-
-Verifique os arquivos modificados:
-
-```bash
-git status
-```
-
-Adicione os arquivos:
-
-```bash
-git add .
-```
-
-Crie o commit:
-
-```bash
-git commit -m "feat: adiciona nova funcionalidade"
-```
-
-Envie a branch para o repositório remoto:
-
-```bash
-git push -u origin feat/nova-funcionalidade
-```
-
----
-
-# 14. Testes
-
-Toda alteração que modifica comportamento da aplicação deve considerar a necessidade de testes.
-
-Execute todos os testes com:
+### 4. Executar os testes
 
 ```bash
 mvn test
 ```
 
-Para executar uma classe de teste específica:
+### 5. Verificar as alterações
 
 ```bash
-mvn -Dtest=NomeDoTeste test
+git status
+git diff
 ```
 
-Antes de finalizar uma alteração, todos os testes existentes devem estar passando.
+### 6. Adicionar os arquivos
+
+```bash
+git add .
+```
+
+### 7. Criar o commit
+
+```bash
+git commit -m "refactor: ajustar exercício 1"
+```
+
+### 8. Enviar a branch para o repositório remoto
+
+No primeiro envio da branch:
+
+```bash
+git push -u origin refactor/exercicio-1
+```
+
+O comando possui três partes principais:
+
+```text
+git push
+```
+
+Envia os commits locais para o repositório remoto.
+
+```text
+-u
+```
+
+Configura a branch remota como **upstream** da branch local.
+
+Isso significa que o Git passa a associar a branch local à sua correspondente no repositório remoto.
+
+```text
+origin
+```
+
+É o nome padrão do repositório remoto.
+
+```text
+refactor/exercicio-1
+```
+
+É o nome da branch que será enviada.
+
+Depois que o upstream estiver configurado, não é necessário informar novamente o repositório e a branch:
+
+```bash
+git push
+```
+
+Da mesma forma, para atualizar a branch local:
+
+```bash
+git pull
+```
+
+### Exemplo completo
+
+```bash
+git checkout main
+git pull origin main
+
+git checkout -b refactor/exercicio-1
+
+mvn test
+
+git status
+git add .
+git commit -m "refactor: ajustar exercício 1"
+
+git push -u origin refactor/exercicio-1
+```
+
+### 9. Criar o Pull Request
+
+Após enviar a branch, abra um Pull Request direcionado para a branch principal.
+
+O Pull Request deve explicar:
+
+* O que foi alterado
+* Por que a alteração foi necessária
+* Quais testes foram realizados
+* Se existe alguma consideração importante para a revisão
+
+---
+
+# 12. Testes Unitários
+
+Testes unitários devem validar uma unidade específica do código de forma isolada.
+
+Exemplos:
+
+* Métodos
+* Classes
+* Regras de negócio
+* Validações
+* Cálculos
+
+Os testes devem ser:
+
+* Determinísticos
+* Independentes
+* Fáceis de entender
+* Rápidos de executar
+
+---
+
+# 13. Mockito
+
+O Mockito deve ser utilizado quando for necessário criar mocks, stubs ou verificar interações entre objetos.
+
+Exemplo de situações:
+
+* Simular uma dependência
+* Isolar uma classe
+* Controlar o retorno de uma dependência
+* Verificar se determinado método foi chamado
+
+Evite utilizar mocks desnecessariamente.
+
+O objetivo é testar o comportamento da unidade sob teste, não reproduzir a implementação interna de suas dependências.
+
+---
+
+# 14. Testes de Integração
+
+Testes de integração devem validar a comunicação entre diferentes componentes da aplicação.
+
+Exemplos:
+
+* Serviço + banco de dados
+* Repository + banco de dados
+* API + camada de serviço
+* Integração entre componentes
+
+Esses testes devem verificar se as partes do sistema funcionam corretamente quando utilizadas em conjunto.
 
 ---
 
 # 15. Testes de Regressão
 
-Quando um bug for corrigido, deve-se avaliar a criação de um teste de regressão.
+Testes de regressão devem garantir que alterações realizadas no código não quebrem funcionalidades que anteriormente funcionavam.
+
+Sempre que um bug for corrigido, considere adicionar um teste que reproduza o problema.
 
 Exemplo:
 
 ```text
-Bug:
-A média dos números estava sendo calculada utilizando divisão inteira.
-
-Correção:
-Converter a soma para double antes da divisão.
-
-Teste de regressão:
-Verificar se a média de valores como 1, 2 e 4 resulta em 2.333...
+Bug encontrado
+      ↓
+Criar teste que reproduz o bug
+      ↓
+Corrigir implementação
+      ↓
+Executar teste
+      ↓
+Garantir que o bug não volte
 ```
-
-O objetivo é garantir que o mesmo problema não volte a ocorrer após futuras alterações.
 
 ---
 
 # 16. Refatoração
 
-Refatorações devem preservar o comportamento esperado da aplicação.
+Refatorações devem melhorar a estrutura interna do código sem alterar seu comportamento esperado.
 
-Exemplo:
+Exemplos:
 
-Antes:
+* Extrair métodos
+* Separar responsabilidades
+* Reduzir duplicação
+* Melhorar nomes
+* Reduzir complexidade
+* Melhorar testabilidade
 
-```text
-MenuExecutor
-    ├── exibe menu
-    ├── lê entrada
-    ├── executa exercício
-    ├── calcula média
-    └── imprime resultado
+Sempre que possível, execute os testes antes e depois da refatoração.
+
+```bash
+mvn test
 ```
-
-Depois:
-
-```text
-MenuExecutor
-    ├── exibe menu
-    ├── lê entrada
-    └── executa exercício
-
-Ex1
-    └── executa lógica do exercício
-```
-
-O objetivo é manter cada classe com responsabilidades bem definidas.
 
 ---
 
 # 17. Responsabilidade das Classes
 
-### `MainClasse`
+Cada classe deve possuir uma responsabilidade clara.
 
-Responsável pelo ponto de entrada da aplicação.
+Evite classes que concentrem:
+
+* Entrada de dados
+* Regras de negócio
+* Persistência
+* Formatação
+* Comunicação externa
+
+na mesma classe.
+
+Prefira separar responsabilidades.
+
+Exemplo conceitual:
 
 ```text
-MainClasse
+Controller
     ↓
-MenuExecutor
+Service
+    ↓
+Repository
+    ↓
+Database
 ```
-
-### `MenuExecutor`
-
-Responsável por:
-
-* exibir o menu;
-* receber a opção do usuário;
-* direcionar a execução;
-* controlar o encerramento da aplicação.
-
-O `MenuExecutor` não deve concentrar a lógica dos exercícios.
-
-### `Ex1`, `Ex2`, `Ex3` etc.
-
-Responsáveis pela implementação dos respectivos exercícios.
 
 ---
 
 # 18. Regras de Código
 
-Durante o desenvolvimento:
+O código deve priorizar:
 
-* manter responsabilidades separadas;
-* evitar métodos excessivamente grandes;
-* evitar duplicação desnecessária;
-* utilizar nomes claros para classes, métodos e variáveis;
-* manter o código formatado;
-* evitar comentários desnecessários;
-* preferir código simples e legível;
-* não adicionar complexidade sem necessidade;
-* corrigir a causa do problema, e não apenas o sintoma.
+* Legibilidade
+* Simplicidade
+* Baixo acoplamento
+* Alta coesão
+* Separação de responsabilidades
+* Testabilidade
+* Manutenibilidade
+
+Evite:
+
+* Código duplicado
+* Métodos excessivamente grandes
+* Classes com muitas responsabilidades
+* Variáveis com nomes genéricos
+* Tratamento de exceções inadequado
+* Complexidade desnecessária
 
 ---
 
-# 19. Checklist antes do Commit
+# 19. Segurança
 
-Antes de realizar um commit, verificar:
+Nunca faça commit de informações sensíveis.
+
+Não adicionar ao repositório:
 
 ```text
-[ ] O código compila?
-[ ] Os testes estão passando?
-[ ] A alteração possui testes quando necessário?
-[ ] O código está formatado?
-[ ] Não existem arquivos desnecessários?
-[ ] Não existem credenciais ou informações sensíveis?
-[ ] A alteração está na branch correta?
-[ ] O commit possui o tipo correto?
-[ ] A mensagem do commit descreve claramente a alteração?
+Senhas
+Tokens
+API Keys
+Credenciais
+Chaves privadas
+Arquivos de configuração com dados sensíveis
 ```
 
-Executar:
+Utilize variáveis de ambiente ou mecanismos apropriados de configuração.
+
+Antes do commit:
+
+```bash
+git status
+git diff
+```
+
+Verifique cuidadosamente os arquivos que serão enviados.
+
+---
+
+# 20. Checklist Antes do Commit
+
+Antes de realizar um commit, verifique:
+
+* [ ] O código compila
+* [ ] Os testes passam
+* [ ] A alteração possui uma responsabilidade clara
+* [ ] Não existem arquivos desnecessários
+* [ ] Não existem credenciais no código
+* [ ] Não existem alterações acidentais
+* [ ] O código segue o padrão do projeto
+* [ ] A mensagem do commit segue Conventional Commits
+
+Execute:
 
 ```bash
 mvn clean test
@@ -618,198 +519,238 @@ Depois:
 
 ```bash
 git status
+git diff
 ```
-
-E então realizar o commit.
 
 ---
 
-# 20. Pull Request
+# 21. Pull Request
 
-Quando a alteração estiver concluída:
+Antes de abrir um Pull Request:
 
-1. Execute os testes.
-2. Verifique o histórico de commits.
-3. Envie a branch para o GitHub.
-4. Abra um Pull Request.
-5. Descreva o que foi alterado.
-6. Informe os testes realizados.
-7. Aguarde a revisão antes do merge.
+```bash
+mvn clean test
+```
 
-Exemplo de descrição:
+Verifique também:
+
+```bash
+git status
+```
+
+O Pull Request deve:
+
+* Ter uma descrição clara
+* Possuir uma finalidade específica
+* Conter testes quando aplicável
+* Não incluir alterações não relacionadas
+* Permitir uma revisão objetiva
+
+Evite Pull Requests excessivamente grandes.
+
+---
+
+# 22. Fluxo de Branches
+
+Fluxo recomendado:
 
 ```text
-## Alteração
+main
+  │
+  ├── feature/nova-funcionalidade
+  │
+  ├── fix/correcao
+  │
+  ├── refactor/refatoracao
+  │
+  ├── test/testes
+  │
+  └── docs/documentacao
+```
 
-Adicionado o menu principal da aplicação.
+Após a revisão e aprovação:
 
-## Implementação
+```text
+branch de trabalho
+        ↓
+Pull Request
+        ↓
+revisão
+        ↓
+testes
+        ↓
+merge
+        ↓
+main
+```
 
-- Adicionado MenuExecutor
-- Adicionadas opções para os exercícios
-- Adicionado controle de encerramento da aplicação
+---
+
+# 23. Regra de Ouro
+
+Antes de enviar qualquer alteração:
+
+```text
+Código funcionando
+       +
+Testes passando
+       +
+Commit organizado
+       +
+Branch organizada
+       +
+Pull Request claro
+```
+
+O objetivo não é apenas fazer o código funcionar.
+
+O objetivo é produzir código **legível, testável, seguro, sustentável e fácil de evoluir**.
+
+---
+
+# 24. Objetivo
+
+Este guia estabelece um padrão comum para contribuição em projetos Java, facilitando:
+
+* Desenvolvimento
+* Testes
+* Revisão de código
+* Manutenção
+* Colaboração
+* Evolução do projeto
+
+---
+
+# 25. Pull Request e Code Review
+
+Todo Pull Request deve apresentar uma descrição clara da alteração realizada e facilitar o processo de revisão do código.
+
+## Descrição do Pull Request
+
+Utilize uma estrutura semelhante:
+
+```markdown
+## Descrição
+
+Solicito revisão e aprovação das alterações realizadas.
+
+### Alterações
+
+- Descrição da alteração 1
+- Descrição da alteração 2
+- Descrição da alteração 3
+
+### Testes
+
+- [x] Testes unitários executados
+- [x] Testes de integração executados
+- [x] `mvn clean test` executado com sucesso
+
+### Code Review
+
+Código revisado e validado.
+
+### Resultado
+
+Aprovado.
+```
+
+## Exemplo
+
+```markdown
+## Descrição
+
+Solicito revisão e aprovação das alterações realizadas.
+
+### Alterações
+
+- Refatoração da implementação.
+- Separação de responsabilidades.
+- Ajustes na validação dos dados.
+- Adição de testes automatizados.
+
+### Testes
+
+- [x] Testes unitários
+- [x] Testes de integração
+- [x] Testes de regressão
+- [x] `mvn clean test`
+
+### Code Review
+
+Código analisado quanto a:
+
+- Legibilidade
+- Organização
+- Separação de responsabilidades
+- Tratamento de exceções
+- Cobertura de testes
+- Possíveis impactos em funcionalidades existentes
+
+### Resultado
+
+**Aprovado.**
+
+Nenhum problema impeditivo identificado durante a revisão.
+```
+
+## Quando houver problemas no Code Review
+
+Caso sejam encontrados problemas, registre-os explicitamente:
+
+```markdown
+### Code Review
+
+Foram identificados os seguintes pontos:
+
+- [ ] Melhorar validação de entrada.
+- [ ] Adicionar teste para cenário de erro.
+- [ ] Ajustar nome do método.
+- [ ] Remover duplicação de código.
+
+### Resultado
+
+**Alterações solicitadas.**
+
+O Pull Request deve ser atualizado antes da aprovação.
+```
+
+## Após a correção
+
+Depois que os pontos forem corrigidos:
+
+```markdown
+### Code Review
+
+Os pontos identificados na revisão foram corrigidos e os testes foram executados novamente.
+
+### Resultado
+
+**Aprovado.**
+
+Código revisado e validado.
+```
+
+## Padrão resumido
+
+Para Pull Requests simples, pode ser utilizado:
+
+```markdown
+## Descrição
+
+Solicito revisão e aprovação das alterações realizadas.
 
 ## Testes
 
-- mvn clean test
+- [x] `mvn clean test`
+
+## Code Review
+
+Código revisado e validado.
+
+## Resultado
+
+**Aprovado.**
 ```
 
----
-
-# 21. Regra de Ouro
-
-Antes de enviar uma alteração, pergunte:
-
-> A alteração está funcionando, está testada e está clara para outra pessoa que precisar manter este código?
-
-Se a resposta for sim, a alteração está pronta para ser compartilhada.
-
----
-
-## 22. Objetivo do Projeto
-
-Este projeto também possui finalidade educacional.
-
-O processo de desenvolvimento deve permitir estudar não apenas a linguagem Java, mas também práticas utilizadas no desenvolvimento profissional de software:
-
-```text
-Código
-  ↓
-Debugging
-  ↓
-Teste
-  ↓
-Correção
-  ↓
-Refatoração
-  ↓
-Regressão
-  ↓
-Commit
-  ↓
-Pull Request
-  ↓
-Integração
-```
-
-A qualidade do projeto deve evoluir junto com o aprendizado.
-
----
-
-# Fluxo de Branches
-
-O desenvolvimento de novas alterações deve partir da branch `main`.
-
-## 1. Criar uma branch
-
-Atualize a `main` antes de iniciar uma nova alteração:
-
-```bash
-git checkout main
-git pull
-```
-
-Crie uma branch de acordo com o tipo de alteração:
-
-```bash
-git checkout -b docs/contributing
-```
-
-Faça as alterações necessárias.
-
----
-
-## 2. Commit
-
-Adicione os arquivos alterados:
-
-```bash
-git add .
-```
-
-Crie o commit seguindo o padrão de Conventional Commits:
-
-```bash
-git commit -m "docs: adiciona guia de contribuição do projeto"
-```
-
----
-
-## 3. Publicar a branch
-
-Envie a branch para o repositório remoto:
-
-```bash
-git push -u origin docs/contributing
-```
-
----
-
-## 4. Iniciar uma nova alteração
-
-Depois de finalizar a alteração atual, volte para a `main`:
-
-```bash
-git checkout main
-git pull
-```
-
-A partir da `main` atualizada, crie uma nova branch para a próxima alteração:
-
-```bash
-git checkout -b feat/nova-funcionalidade
-```
-
-Depois disso, o processo começa novamente:
-
-```text
-main
- ↓
-git pull
- ↓
-criar nova branch
- ↓
-desenvolver
- ↓
-git add
- ↓
-git commit
- ↓
-git push
- ↓
-Pull Request
- ↓
-merge
- ↓
-main
-```
-
-### Exemplos de novas branches
-
-```bash
-git checkout -b feat/exercicio-4
-```
-
-```bash
-git checkout -b fix/calculo-media
-```
-
-```bash
-git checkout -b refactor/menu-executor
-```
-
-```bash
-git checkout -b test/exercicio-1
-```
-
-```bash
-git checkout -b docs/readme
-```
-
-```bash
-git checkout -b build/dependencias
-```
-
-A regra principal é:
-
-> **Toda nova alteração deve começar a partir da `main` atualizada e ser desenvolvida em uma branch própria.**
+A descrição do Pull Request deve permitir que outra pessoa compreenda **o que foi alterado, como foi validado e qual é o estado da revisão** sem precisar analisar todo o histórico de commits.
