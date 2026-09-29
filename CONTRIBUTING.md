@@ -754,3 +754,478 @@ Código revisado e validado.
 ```
 
 A descrição do Pull Request deve permitir que outra pessoa compreenda **o que foi alterado, como foi validado e qual é o estado da revisão** sem precisar analisar todo o histórico de commits.
+
+---
+
+# Contributing
+
+Obrigado por contribuir com este projeto.
+
+Este documento define o fluxo de trabalho com Git, padrão de branches, commits e versionamento utilizado no projeto.
+
+---
+
+## 1. Branches principais
+
+O projeto utiliza três branches principais:
+
+```text
+main
+develop
+staging
+```
+
+### `main`
+
+Representa o código considerado **estável e pronto para produção**.
+
+```text
+main
+```
+
+A branch `main` deve conter apenas versões estáveis e oficialmente liberadas.
+
+Exemplo:
+
+```text
+v1.0.0
+v1.1.0
+v2.0.0
+```
+
+---
+
+### `develop`
+
+É a branch de **desenvolvimento**.
+
+```text
+develop
+```
+
+Novas funcionalidades, refatorações e correções são integradas primeiro em `develop`.
+
+---
+
+### `staging`
+
+É utilizada para **homologação e validação integrada** antes da publicação em produção.
+
+```text
+staging
+```
+
+Pode ser utilizada para testes de integração, validação da aplicação e preparação para uma release.
+
+---
+
+# 2. Branches de trabalho
+
+As alterações devem ser realizadas em branches próprias.
+
+Exemplo:
+
+```text
+refactor/exercicio-3-exceptions
+```
+
+Outros exemplos:
+
+```text
+feature/nova-funcionalidade
+fix/corrige-validacao
+refactor/melhora-excecoes
+test/adiciona-testes
+docs/atualiza-readme
+```
+
+## Convenção
+
+Utilize um prefixo de acordo com o tipo da alteração:
+
+| Prefixo     | Utilização                                 |
+| ----------- | ------------------------------------------ |
+| `feature/`  | Nova funcionalidade                        |
+| `fix/`      | Correção de bug                            |
+| `refactor/` | Refatoração sem alteração de comportamento |
+| `test/`     | Criação ou alteração de testes             |
+| `docs/`     | Documentação                               |
+| `chore/`    | Tarefas de manutenção                      |
+| `build/`    | Alterações de build/dependências           |
+
+---
+
+# 3. Criando uma branch
+
+Antes de iniciar uma alteração, atualize a branch `main`:
+
+```bash
+git checkout main
+git pull
+```
+
+Crie uma nova branch:
+
+```bash
+git checkout -b refactor/exercicio-3-exceptions
+```
+
+Faça as alterações necessárias.
+
+---
+
+# 4. Commit
+
+Adicione os arquivos modificados:
+
+```bash
+git add src/main/java/br/botelho/loester/exercicios/Ex3.java
+```
+
+Crie o commit:
+
+```bash
+git commit -m "refactor: permite propagação das exceções no exercício 3"
+```
+
+O projeto utiliza mensagens de commit seguindo o padrão **Conventional Commits**.
+
+Formato:
+
+```text
+tipo: descrição
+```
+
+Exemplos:
+
+```text
+feat: adiciona novo exercício
+fix: corrige tratamento de exceção
+refactor: simplifica implementação
+test: adiciona testes para exercício 3
+docs: atualiza documentação
+chore: atualiza dependências
+```
+
+---
+
+# 5. Enviando a branch para o GitHub
+
+Após criar o commit:
+
+```bash
+git push -u origin refactor/exercicio-3-exceptions
+```
+
+Depois disso, deve ser criado um **Pull Request** para a branch de destino definida pelo fluxo do projeto.
+
+---
+
+# 6. Finalizando a branch
+
+Depois que o Pull Request for integrado, volte para `main`:
+
+```bash
+git checkout main
+git pull
+```
+
+Remova a branch local:
+
+```bash
+git branch -D refactor/exercicio-3-exceptions
+```
+
+Se necessário, a branch remota também pode ser removida:
+
+```bash
+git push origin --delete refactor/exercicio-3-exceptions
+```
+
+---
+
+# 7. Fluxo de desenvolvimento
+
+O fluxo básico do projeto é:
+
+```text
+main
+  │
+  └── develop
+        │
+        └── feature/*
+        └── fix/*
+        └── refactor/*
+        └── test/*
+        └── docs/*
+        │
+        ↓
+     staging
+        │
+        ↓
+      release
+        │
+        ↓
+       main
+```
+
+De forma simplificada:
+
+```text
+Branch de trabalho
+        ↓
+     develop
+        ↓
+     staging
+        ↓
+     release
+        ↓
+      main
+```
+
+---
+
+# 8. Release Branches
+
+As branches de release seguem o seguinte padrão:
+
+```text
+release/1.0.0-alpha
+release/1.0.0-beta
+release/1.0.0-rc.1
+release/1.0.0
+```
+
+Para novas versões de uma mesma etapa:
+
+```text
+release/1.0.0-alpha.2
+release/1.0.0-beta.2
+release/1.0.0-rc.2
+```
+
+---
+
+# 9. Semantic Versioning
+
+O projeto utiliza o padrão:
+
+```text
+MAJOR.MINOR.PATCH-PRERELEASE
+```
+
+Exemplo:
+
+```text
+1.0.0-alpha.1
+```
+
+Onde:
+
+```text
+MAJOR   = 1
+MINOR   = 0
+PATCH   = 0
+PRE     = alpha.1
+```
+
+---
+
+# 10. Ciclo de uma versão
+
+| Versão          | Etapa                  | Objetivo                                |
+| --------------- | ---------------------- | --------------------------------------- |
+| `1.0.0-alpha.1` | **Alpha**              | Desenvolvimento e testes internos       |
+| `1.0.0-alpha.2` | **Alpha 2**            | Nova rodada de desenvolvimento e testes |
+| `1.0.0-beta.1`  | **Beta**               | QA e testes mais amplos                 |
+| `1.0.0-beta.2`  | **Beta 2**             | Nova rodada de QA                       |
+| `1.0.0-rc.1`    | **Release Candidate**  | Homologação e validação pelo cliente    |
+| `1.0.0-rc.2`    | **RC 2**               | Nova rodada de homologação              |
+| `1.0.0`         | **Final / Production** | Lançamento oficial em produção          |
+
+---
+
+# 11. Alpha
+
+A versão **Alpha** representa uma versão ainda em desenvolvimento.
+
+Exemplo:
+
+```text
+1.0.0-alpha.1
+```
+
+Objetivos:
+
+* Desenvolvimento da funcionalidade;
+* Testes internos;
+* Identificação de problemas;
+* Validação inicial da implementação.
+
+A versão Alpha pode sofrer alterações significativas.
+
+---
+
+# 12. Beta
+
+A versão **Beta** representa uma versão mais estável que a Alpha.
+
+Exemplo:
+
+```text
+1.0.0-beta.1
+```
+
+Objetivos:
+
+* Testes de QA;
+* Testes de integração;
+* Identificação de bugs;
+* Validação das funcionalidades;
+* Preparação para homologação.
+
+---
+
+# 13. Release Candidate
+
+A versão **Release Candidate (RC)** é uma candidata à versão final.
+
+Exemplo:
+
+```text
+1.0.0-rc.1
+```
+
+Objetivos:
+
+* Homologação;
+* Validação pelo cliente;
+* Testes em ambiente semelhante à produção;
+* Correção de problemas encontrados durante a homologação.
+
+Se forem encontrados problemas, uma nova RC pode ser criada:
+
+```text
+1.0.0-rc.2
+```
+
+---
+
+# 14. Final / Production
+
+Quando a versão é aprovada para produção:
+
+```text
+1.0.0
+```
+
+A versão final não possui o identificador `alpha`, `beta` ou `rc`.
+
+Exemplo:
+
+```text
+1.0.0-alpha.1
+       ↓
+1.0.0-beta.1
+       ↓
+1.0.0-rc.1
+       ↓
+1.0.0
+```
+
+A versão final deve ser marcada com uma tag Git:
+
+```bash
+git tag -a v1.0.0 -m "Release v1.0.0"
+git push origin v1.0.0
+```
+
+---
+
+# 15. Exemplo completo
+
+Um ciclo completo pode seguir esta sequência:
+
+```text
+develop
+   │
+   ├── release/1.0.0-alpha.1
+   │
+   ├── release/1.0.0-alpha.2
+   │
+   ├── release/1.0.0-beta.1
+   │
+   ├── release/1.0.0-beta.2
+   │
+   ├── release/1.0.0-rc.1
+   │
+   ├── release/1.0.0-rc.2
+   │
+   ↓
+ staging
+   │
+   ↓
+ main
+   │
+   └── v1.0.0
+```
+
+---
+
+# 16. Resumo do fluxo
+
+```text
+1. Atualizar main
+   ↓
+2. Criar branch de trabalho
+   ↓
+3. Desenvolver
+   ↓
+4. Criar commit
+   ↓
+5. Push da branch
+   ↓
+6. Pull Request
+   ↓
+7. Merge em develop
+   ↓
+8. Validar em staging
+   ↓
+9. Criar release
+   ↓
+10. Homologação
+   ↓
+11. Merge em main
+   ↓
+12. Criar tag da versão
+```
+
+Exemplo:
+
+```text
+feature/*
+     ↓
+ develop
+     ↓
+ staging
+     ↓
+release/1.0.0-rc.1
+     ↓
+   main
+     ↓
+  v1.0.0
+```
+
+---
+
+## 17. Boas práticas
+
+* Mantenha as branches pequenas e focadas em uma única alteração.
+* Utilize nomes descritivos.
+* Não faça commits diretamente em `main`.
+* Não misture funcionalidades diferentes no mesmo commit.
+* Escreva mensagens de commit claras.
+* Execute os testes antes de abrir um Pull Request.
+* Atualize sua branch antes de iniciar uma nova alteração.
+* Remova branches de trabalho após o merge.
+* Utilize tags para identificar versões oficialmente publicadas.
