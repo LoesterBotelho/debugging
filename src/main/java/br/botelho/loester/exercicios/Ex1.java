@@ -1,4 +1,4 @@
-package testes.exercicios;
+package br.botelho.loester.exercicios;
 import java.util.Scanner;
 
 /**

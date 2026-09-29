@@ -1,4 +1,4 @@
-package testes.explicacao;
+package br.botelho.loester.explicacao;
 
 public class MainTestes1 {
 	public static void main(String[] args) {

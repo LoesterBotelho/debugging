@@ -1,4 +1,4 @@
-package testes.explicacao;
+package br.botelho.loester.explicacao;
 
 import java.util.Scanner;
 
