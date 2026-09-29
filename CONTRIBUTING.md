@@ -693,3 +693,123 @@ Integração
 ```
 
 A qualidade do projeto deve evoluir junto com o aprendizado.
+
+---
+
+# Fluxo de Branches
+
+O desenvolvimento de novas alterações deve partir da branch `main`.
+
+## 1. Criar uma branch
+
+Atualize a `main` antes de iniciar uma nova alteração:
+
+```bash
+git checkout main
+git pull
+```
+
+Crie uma branch de acordo com o tipo de alteração:
+
+```bash
+git checkout -b docs/contributing
+```
+
+Faça as alterações necessárias.
+
+---
+
+## 2. Commit
+
+Adicione os arquivos alterados:
+
+```bash
+git add .
+```
+
+Crie o commit seguindo o padrão de Conventional Commits:
+
+```bash
+git commit -m "docs: adiciona guia de contribuição do projeto"
+```
+
+---
+
+## 3. Publicar a branch
+
+Envie a branch para o repositório remoto:
+
+```bash
+git push -u origin docs/contributing
+```
+
+---
+
+## 4. Iniciar uma nova alteração
+
+Depois de finalizar a alteração atual, volte para a `main`:
+
+```bash
+git checkout main
+git pull
+```
+
+A partir da `main` atualizada, crie uma nova branch para a próxima alteração:
+
+```bash
+git checkout -b feat/nova-funcionalidade
+```
+
+Depois disso, o processo começa novamente:
+
+```text
+main
+ ↓
+git pull
+ ↓
+criar nova branch
+ ↓
+desenvolver
+ ↓
+git add
+ ↓
+git commit
+ ↓
+git push
+ ↓
+Pull Request
+ ↓
+merge
+ ↓
+main
+```
+
+### Exemplos de novas branches
+
+```bash
+git checkout -b feat/exercicio-4
+```
+
+```bash
+git checkout -b fix/calculo-media
+```
+
+```bash
+git checkout -b refactor/menu-executor
+```
+
+```bash
+git checkout -b test/exercicio-1
+```
+
+```bash
+git checkout -b docs/readme
+```
+
+```bash
+git checkout -b build/dependencias
+```
+
+A regra principal é:
+
+> **Toda nova alteração deve começar a partir da `main` atualizada e ser desenvolvida em uma branch própria.**
