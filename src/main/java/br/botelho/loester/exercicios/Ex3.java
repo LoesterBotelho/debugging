@@ -1,6 +1,5 @@
 package br.botelho.loester.exercicios;
 
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -15,7 +14,7 @@ public class Ex3 {
             {20.7, 21.0, 21.5, 22.1, 22.5, 22.7, 22.9, 23.1, 23.5, 23.9, 24.2, 24.6, 25.0, 25.3, 25.6, 25.9, 26.2, 26.5, 26.8, 27.1, 27.4, 27.7, 27.9, 27.8},
             {20.2, 20.5, 21.0, 21.4, 21.8, 22.2, 22.5, 22.8, 23.1, 23.3, 23.6, 23.9, 24.2, 24.5, 24.8, 25.1, 25.4, 25.7, 26.0, 26.3, 26.6, 26.9, 27.1, 27.2},
             {19.8, 20.0, 20.3, 20.7, 21.1, 21.4, 21.8, 22.1, 22.4, 22.7, 23.0, 23.3, 23.6, 23.9, 24.2, 24.5, 24.8, 25.1, 25.4, 25.7, 26.0, 26.2, 26.3, 26.5},
-            {19.5, 19.8, 20.1, 23.5, 23.9, 24.3, 24.7, 25.1, 25.5, 26.8, 27.1, 28.4, 28.7, 29.0, 28.3, 28.6, 28.9, 29.2, 28.5, 28.8, 28.1, 27.3, 27.5, 26.7},
+            {19.5, 19.8, 20.1, 23.5, 23.9, 24.3, 24.7, 25.1, 24.7, 26.8, 27.1, 28.4, 28.7, 29.0, 28.3, 28.6, 28.9, 29.2, 28.5, 28.8, 28.1, 27.3, 27.5, 26.7},
             {19.2, 19.5, 19.9, 20.3, 20.7, 21.1, 21.5, 21.9, 22.3, 22.7, 23.1, 23.4, 23.7, 24.0, 24.3, 24.6, 24.9, 25.2, 25.5, 25.8, 26.1, 26.3, 26.5, 26.7}
     };
 
@@ -31,22 +30,15 @@ public class Ex3 {
 
     public void executar(Scanner scanner) {
 
-        try {
+        int indiceDia = solicitarDia(scanner);
 
-            int indiceDia = solicitarDia(scanner);
+        calcularMediaDia(indiceDia);
 
-            calcularMediaDia(indiceDia);
+        int hora = solicitarHora(scanner);
 
-            int hora = solicitarHora(scanner);
+        calcularMediaHora(hora);
 
-            calcularMediaHora(hora);
-
-            calcularMaiorAmplitude();
-
-        } catch (DiaSemanaInvalidoException | HoraInvalidaException e) {
-
-            System.out.println(e.getMessage());
-        }
+        calcularMaiorAmplitude();
     }
 
     private int solicitarDia(Scanner scanner) {
@@ -93,6 +85,7 @@ public class Ex3 {
             int hora = scanner.nextInt();
 
             if (hora < 0 || hora >= 24) {
+
                 throw new HoraInvalidaException(
                         "Hora inválida: " + hora + ". Digite uma hora de 0 até 23."
                 );
