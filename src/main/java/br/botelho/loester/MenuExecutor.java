@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import br.botelho.loester.exercicios.Ex1;
 import br.botelho.loester.exercicios.Ex2;
+import br.botelho.loester.exercicios.Ex3;
 
 public class MenuExecutor {
 
@@ -73,6 +74,8 @@ public class MenuExecutor {
     private void executarExercicio3() {
     	System.out.println(divisoria);
         System.out.println("Executando Exercício 3...\n");
+        Ex3 ex3 = new Ex3();
+        ex3.executar(scanner);
     }
     
 
