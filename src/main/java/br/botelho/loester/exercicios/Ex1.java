@@ -1,42 +1,48 @@
 package br.botelho.loester.exercicios;
+
 import java.util.Scanner;
 
-/**
- * Exercício 1)
- * <br>
- * Descreva um algoritmo que vá lendo a altura de pessoas até o usuário entrar
- * com o número 0
- * <br>
- * Ao final, calcule a média das alturas informadas.
- */
 public class Ex1 {
 
-	public static void main(String[] args) {
+    public void executar(Scanner scanner) {
 
-		Scanner sc = new Scanner(System.in);
+        double somaAltura = 0.0;
+        int contador = 0;
 
-		double altura = 0.0;
-		double somaAltura = 0.0;
-		int contador = 0;
-				
-		while (true) {
-						
-			System.out.println("Insira a altura");
-			altura = sc.nextDouble();
-			
-			if (altura > 0) {
-				contador++;
-				somaAltura += altura;
-			} else {
-				break;
-			}
-		}
+        while (true) {
 
-		sc.close();
-		
-		double media = somaAltura / contador;
+            System.out.print("Insira a altura: ");
 
-		System.out.println("Média de altura: " + media + " metros");
-	}
+            try {
 
+                double altura = scanner.nextDouble();
+
+                if (altura == 0) {
+                    break;
+                }
+
+                if (altura < 0) {
+                    System.out.println("A altura deve ser maior que zero.");
+                    continue;
+                }
+
+                somaAltura += altura;
+                contador++;
+
+            } catch (java.util.InputMismatchException e) {
+
+                System.out.println("Entrada inválida. Informe uma altura válida.");
+                scanner.next();
+            }
+        }
+
+        if (contador == 0) {
+            System.out.println("Nenhuma altura foi informada.");
+            return;
+        }
+
+        double media = somaAltura / contador;
+
+        System.out.println("Média de altura: " + media + " metros");
+    }
 }
