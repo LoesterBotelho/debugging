@@ -1,66 +1,74 @@
+
 package br.botelho.loester.exercicios05102026.exercicio3;
+
+import java.util.Objects;
 
 public class Exercicio3 {
 
-    /**
-     * Gera um nome completo no estilo Star Wars a partir dos dados de uma pessoa.
-     *
-     * <p>
-     * A fórmula utilizada é:
-     *
-     * <p>
-     * Primeiro nome Star Wars:
-     * <ul>
-     *     <li>3 primeiras letras do sobrenome;</li>
-     *     <li>2 primeiras letras do nome.</li>
-     * </ul>
-     *
-     * <p>
-     * Sobrenome Star Wars:
-     * <ul>
-     *     <li>2 primeiras letras do sobrenome de solteira da mãe;</li>
-     *     <li>3 primeiras letras da cidade de nascimento.</li>
-     * </ul>
-     *
-     * @param pessoa pessoa contendo nome, sobrenome, sobrenome da mãe
-     *               e cidade de nascimento
-     * @return nome completo no formato Star Wars
-     */
     public static String gerarNomeStarWars(Pessoa pessoa) {
 
-        // ---------------------------------------------------------
-        // Primeiro nome Star Wars
-        // ---------------------------------------------------------
+        if (ehValido(pessoa)) {
 
-        // Pega as 3 primeiras letras do sobrenome.
-        String parteSobrenome = pessoa.sobrenome().substring(0, 3);
+            String parteSobrenome = pessoa.sobrenome().substring(0, 3);
 
-        // Pega as 2 primeiras letras do nome.
-        String parteNome = pessoa.nome().substring(0, 2);
+            String parteNome = pessoa.nome().substring(0, 2);
 
-        // Junta as duas partes.
-        String primeiroNomeStarWars = parteSobrenome + parteNome;
+            String primeiroNomeStarWars = parteSobrenome + parteNome;
 
+            String parteMae = pessoa.sobrenomeMaeSolteira().substring(0, 2);
 
-        // ---------------------------------------------------------
-        // Sobrenome Star Wars
-        // ---------------------------------------------------------
+            String parteCidade = pessoa.cidadeNascimento().substring(0, 3);
 
-        // Pega as 2 primeiras letras do sobrenome de solteira da mãe.
-        String parteMae = pessoa.sobrenomeMaeSolteira().substring(0, 2);
+            String sobrenomeStarWars = parteMae + parteCidade;
 
-        // Pega as 3 primeiras letras da cidade de nascimento.
-        String parteCidade = pessoa.cidadeNascimento().substring(0, 3);
+            return primeiroNomeStarWars + " " + sobrenomeStarWars;
+        }
 
-        // Junta as duas partes.
-        String sobrenomeStarWars = parteMae + parteCidade;
+        throw new IllegalArgumentException("Pessoa inválida.");
+    }
 
+    private static boolean ehValido(Pessoa pessoa) {
 
-        // ---------------------------------------------------------
-        // Nome completo
-        // ---------------------------------------------------------
+        Objects.requireNonNull(pessoa, "Pessoa não pode ser null.");
 
-        // Junta o primeiro nome e o sobrenome Star Wars.
-        return primeiroNomeStarWars + " " + sobrenomeStarWars;
+        validarParametro(pessoa.nome(), "nome");
+        validarParametro(pessoa.sobrenome(), "sobrenome");
+        validarParametro(pessoa.sobrenomeMaeSolteira(), "sobrenomeMaeSolteira");
+        validarParametro(pessoa.cidadeNascimento(), "cidadeNascimento");
+
+        if (pessoa.sobrenome().length() < 3) {
+            throw new IllegalArgumentException(
+                    "O sobrenome deve possuir pelo menos 3 caracteres."
+            );
+        }
+
+        if (pessoa.nome().length() < 2) {
+            throw new IllegalArgumentException(
+                    "O nome deve possuir pelo menos 2 caracteres."
+            );
+        }
+
+        if (pessoa.sobrenomeMaeSolteira().length() < 2) {
+            throw new IllegalArgumentException(
+                    "O sobrenome materno deve possuir pelo menos 2 caracteres."
+            );
+        }
+
+        if (pessoa.cidadeNascimento().length() < 3) {
+            throw new IllegalArgumentException(
+                    "A cidade de nascimento deve possuir pelo menos 3 caracteres."
+            );
+        }
+
+        return true;
+    }
+
+    private static void validarParametro(String valor, String nomeParametro) {
+
+        if (valor == null || valor.isBlank()) {
+            throw new IllegalArgumentException(
+                    "O parâmetro '" + nomeParametro + "' não pode ser null ou vazio."
+            );
+        }
     }
 }
