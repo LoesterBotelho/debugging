@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -8,13 +10,14 @@
     <groupId>br.botelho.loester</groupId>
     <artifactId>debugging</artifactId>
     <version>1.0.0</version>
+
     <packaging>jar</packaging>
 
     <name>debugging</name>
 
     <description>
         Projeto Maven com JUnit 6 e Mockito para estudar testes unitários,
-        testes de integração e teste de regressão.
+        testes de integração e testes de regressão.
     </description>
 
     <properties>
@@ -24,6 +27,8 @@
 
         <junit.version>6.0.0</junit.version>
         <mockito.version>5.20.0</mockito.version>
+        <assertj.version>3.27.6</assertj.version>
+        <h2.version>2.3.232</h2.version>
 
     </properties>
 
@@ -45,7 +50,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Integração Mockito + JUnit -->
+        <!-- Mockito + JUnit Jupiter -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
@@ -57,7 +62,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.27.6</version>
+            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -65,7 +70,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.3.232</version>
+            <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -75,7 +80,7 @@
 
         <plugins>
 
-            <!-- Compilação Java 25 -->
+            <!-- Java 25 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -86,20 +91,14 @@
                 </configuration>
             </plugin>
 
-            <!-- Executa testes JUnit com o agente do Mockito -->
+            <!-- JUnit 6 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.4</version>
-
-                <configuration>
-                    <argLine>
-                        -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
-                    </argLine>
-                </configuration>
             </plugin>
 
-            <!-- Gerar JAR executável -->
+            <!-- JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
