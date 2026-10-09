@@ -1,14 +1,17 @@
 package br.botelho.loester.exercicios05102026.exercicio2;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Testes para verificar as estações do ano")
 class Exercicio2Test {
 
     // Should / When / Then
     // Deve / Quando / Então
 
     @Test
+    @DisplayName("Deve retornar verão quando a estação for 1")
     void deveRetornarVeraoQuandoEstacaoForUm() {
 
         // Arrange
@@ -23,6 +26,7 @@ class Exercicio2Test {
     }
 
     @Test
+    @DisplayName("Deve retornar outono quando a estação for 2")
     void deveRetornarOutonoQuandoEstacaoForDois() {
 
         // Arrange
@@ -37,6 +41,7 @@ class Exercicio2Test {
     }
 
     @Test
+    @DisplayName("Deve retornar inverno quando a estação for 3")
     void deveRetornarInvernoQuandoEstacaoForTres() {
 
         // Arrange
@@ -51,6 +56,7 @@ class Exercicio2Test {
     }
 
     @Test
+    @DisplayName("Deve retornar primavera quando a estação for 4")
     void deveRetornarPrimaveraQuandoEstacaoForQuatro() {
 
         // Arrange
@@ -65,6 +71,7 @@ class Exercicio2Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a estação for menor que 1")
     void deveLancarExcecaoQuandoEstacaoForMenorQueUm() {
 
         // Arrange
@@ -78,6 +85,7 @@ class Exercicio2Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a estação for maior que 4")
     void deveLancarExcecaoQuandoEstacaoForMaiorQueQuatro() {
 
         // Arrange

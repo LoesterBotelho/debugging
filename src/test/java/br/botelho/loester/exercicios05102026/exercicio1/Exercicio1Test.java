@@ -1,8 +1,10 @@
 package br.botelho.loester.exercicios05102026.exercicio1;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Testes para verificar se um número é par ou ímpar")
 class Exercicio1Test {
 
     // Convenção Should / When / Then
@@ -11,6 +13,7 @@ class Exercicio1Test {
     // Então
 
     @Test
+    @DisplayName("Deve retornar verdadeiro quando o número for par")
     void validarPar() {
 
         // Arrange
@@ -25,6 +28,7 @@ class Exercicio1Test {
     }
 
     @Test
+    @DisplayName("Deve retornar falso quando o número for ímpar")
     void validarImpar() {
 
         // Arrange

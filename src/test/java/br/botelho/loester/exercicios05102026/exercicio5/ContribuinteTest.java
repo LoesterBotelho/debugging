@@ -1,14 +1,17 @@
 package br.botelho.loester.exercicios05102026.exercicio5;
 
-import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("Testes de cálculo do imposto de renda do contribuinte")
 class ContribuinteTest {
 
     @Test
+    @DisplayName("Deve calcular imposto de renda com alíquota de 0%")
     void deveCalcularImpostoDeRendaComAliquotaDeZeroPorCento() {
         // Arrange
         Contribuinte contribuinte = new Contribuinte(
@@ -24,8 +27,9 @@ class ContribuinteTest {
         // Assert
         assertThat(imposto).isEqualByComparingTo("0.00");
     }
-    
+
     @Test
+    @DisplayName("Deve calcular imposto de renda com alíquota de 5,8%")
     void deveCalcularImpostoDeRendaComAliquotaDeCincoVirgulaOitoPorCento() {
         // Arrange
         Contribuinte contribuinte = new Contribuinte(
@@ -41,8 +45,9 @@ class ContribuinteTest {
         // Assert
         assertThat(imposto).isEqualByComparingTo("522.00");
     }
-    
+
     @Test
+    @DisplayName("Deve calcular imposto de renda com alíquota de 15%")
     void deveCalcularImpostoDeRendaComAliquotaDeQuinzePorCento() {
         // Arrange
         Contribuinte contribuinte = new Contribuinte(
@@ -58,8 +63,9 @@ class ContribuinteTest {
         // Assert
         assertThat(imposto).isEqualByComparingTo("3750.00");
     }
-    
+
     @Test
+    @DisplayName("Deve calcular imposto de renda com alíquota de 27,5%")
     void deveCalcularImpostoDeRendaComAliquotaDeVinteESeteVirgulaCincoPorCento() {
         // Arrange
         Contribuinte contribuinte = new Contribuinte(
@@ -75,8 +81,9 @@ class ContribuinteTest {
         // Assert
         assertThat(imposto).isEqualByComparingTo("9625.00");
     }
-    
+
     @Test
+    @DisplayName("Deve calcular imposto de renda com alíquota de 30%")
     void deveCalcularImpostoDeRendaComAliquotaDeTrintaPorCento() {
         // Arrange
         Contribuinte contribuinte = new Contribuinte(
@@ -92,5 +99,4 @@ class ContribuinteTest {
         // Assert
         assertThat(imposto).isEqualByComparingTo("12000.00");
     }
-    
 }

@@ -1,14 +1,17 @@
 package br.botelho.loester.exercicios05102026.exercicio4;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 // Should / When / Then
 // Deve / Quando / Então
 
+@DisplayName("Testes de classificação de categoria e IMC do atleta")
 class AtletaTest {
 
     @Test
+    @DisplayName("Deve classificar como pré-mirim quando a idade for 5 anos")
     void deveClassificarComoPreMirimQuandoIdadeForCincoAnos() {
 
         // Arrange | Preparar
@@ -23,6 +26,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como pré-mirim quando a idade for 7 anos")
     void deveClassificarComoPreMirimQuandoIdadeForSeteAnos() {
 
         // Arrange | Preparar
@@ -37,6 +41,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como mirim quando a idade for 8 anos")
     void deveClassificarComoMirimQuandoIdadeForOitoAnos() {
 
         // Arrange | Preparar
@@ -51,6 +56,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como mirim quando a idade for 10 anos")
     void deveClassificarComoMirimQuandoIdadeForDezAnos() {
 
         // Arrange | Preparar
@@ -65,6 +71,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como infantil quando a idade for 11 anos")
     void deveClassificarComoInfantilQuandoIdadeForOnzeAnos() {
 
         // Arrange | Preparar
@@ -79,6 +86,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como infantil quando a idade for 13 anos")
     void deveClassificarComoInfantilQuandoIdadeForTrezeAnos() {
 
         // Arrange | Preparar
@@ -93,6 +101,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como infanto-juvenil quando a idade for 14 anos")
     void deveClassificarComoInfantoJuvenilQuandoIdadeForQuatorzeAnos() {
 
         // Arrange | Preparar
@@ -107,6 +116,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como infanto-juvenil quando a idade for 17 anos")
     void deveClassificarComoInfantoJuvenilQuandoIdadeForDezesseteAnos() {
 
         // Arrange | Preparar
@@ -121,6 +131,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como juvenil quando a idade for 18 anos")
     void deveClassificarComoJuvenilQuandoIdadeForDezoitoAnos() {
 
         // Arrange | Preparar
@@ -135,6 +146,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como juvenil quando a idade for 20 anos")
     void deveClassificarComoJuvenilQuandoIdadeForVinteAnos() {
 
         // Arrange | Preparar
@@ -149,6 +161,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar como adulto quando a idade for 21 anos")
     void deveClassificarComoAdultoQuandoIdadeForVinteUmAnos() {
 
         // Arrange | Preparar
@@ -163,13 +176,16 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a idade for menor que 5 anos")
     void deveLancarExceptionQuandoIdadeForMenorQueCincoAnos() {
 
         // Arrange | Preparar
         Atleta atleta = new Atleta("João", 4, 1.20, 25.0);
 
         // Act | Agir
-        Throwable exception = Assertions.catchThrowable(atleta::classificarCategoria);
+        Throwable exception = Assertions.catchThrowable(
+                atleta::classificarCategoria
+        );
 
         // Assert | AssertJ
         Assertions.assertThat(exception)
@@ -177,6 +193,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve calcular o IMC corretamente")
     void deveCalcularImcCorretamente() {
 
         // Arrange | Preparar
@@ -191,6 +208,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar o IMC como magreza")
     void deveClassificarImcComoMagreza() {
 
         // Arrange | Preparar
@@ -205,6 +223,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar o IMC como saudável")
     void deveClassificarImcComoSaudavel() {
 
         // Arrange | Preparar
@@ -219,6 +238,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar o IMC como sobrepeso")
     void deveClassificarImcComoSobrepeso() {
 
         // Arrange | Preparar
@@ -233,6 +253,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar o IMC como obesidade grau I")
     void deveClassificarImcComoObesidadeGrauI() {
 
         // Arrange | Preparar
@@ -247,6 +268,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar o IMC como obesidade grau II")
     void deveClassificarImcComoObesidadeGrauII() {
 
         // Arrange | Preparar
@@ -261,6 +283,7 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve classificar o IMC como obesidade grau III")
     void deveClassificarImcComoObesidadeGrauIII() {
 
         // Arrange | Preparar
@@ -275,13 +298,16 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a altura for zero")
     void deveLancarExceptionQuandoAlturaForZero() {
 
         // Arrange | Preparar
         Atleta atleta = new Atleta("Carlos", 25, 0.0, 80.0);
 
         // Act | Agir
-        Throwable exception = Assertions.catchThrowable(atleta::calcularImc);
+        Throwable exception = Assertions.catchThrowable(
+                atleta::calcularImc
+        );
 
         // Assert | AssertJ
         Assertions.assertThat(exception)
@@ -289,18 +315,19 @@ class AtletaTest {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando o peso for negativo")
     void deveLancarExceptionQuandoPesoForNegativo() {
 
         // Arrange | Preparar
         Atleta atleta = new Atleta("Carlos", 25, 1.80, -80.0);
 
         // Act | Agir
-        Throwable exception = Assertions.catchThrowable(atleta::calcularImc);
+        Throwable exception = Assertions.catchThrowable(
+                atleta::calcularImc
+        );
 
         // Assert | AssertJ
         Assertions.assertThat(exception)
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
 }
-

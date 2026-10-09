@@ -10,10 +10,12 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.botelho.loester.exception.EntradaNumeroInvalidaException;
 
+@DisplayName("Testes do exercício de análise de números")
 class Ex2Test {
 
     private final Ex2 ex2 = new Ex2();
@@ -34,6 +36,7 @@ class Ex2Test {
     }
 
     @Test
+    @DisplayName("Deve calcular o maior, o menor, a soma e a média")
     void deveCalcularMaiorMenorSomaEMedia() {
         Scanner scanner = new Scanner("1 2 3 4 6");
 
@@ -48,6 +51,7 @@ class Ex2Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a entrada não for numérica")
     void deveLancarExcecaoQuandoEntradaNaoForNumero() {
         Scanner scanner = new Scanner("1 2 abc 4 5");
 

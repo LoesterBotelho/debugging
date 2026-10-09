@@ -10,11 +10,13 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.botelho.loester.exception.DiaSemanaInvalidoException;
 import br.botelho.loester.exception.HoraInvalidaException;
 
+@DisplayName("Testes do exercício de análise de temperaturas")
 class Ex3Test {
 
     private final Ex3 ex3 = new Ex3();
@@ -35,6 +37,7 @@ class Ex3Test {
     }
 
     @Test
+    @DisplayName("Deve executar corretamente com dia da semana e hora válidos")
     void deveExecutarComDiaEHoraValidos() {
         Scanner scanner = new Scanner("segunda 12");
 
@@ -48,6 +51,7 @@ class Ex3Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando o dia da semana for inválido")
     void deveLancarExcecaoQuandoDiaForInvalido() {
         Scanner scanner = new Scanner("invalido");
 
@@ -58,6 +62,7 @@ class Ex3Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a hora for negativa")
     void deveLancarExcecaoQuandoHoraForNegativa() {
         Scanner scanner = new Scanner("segunda -1");
 
@@ -68,6 +73,7 @@ class Ex3Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a hora for maior ou igual a 24")
     void deveLancarExcecaoQuandoHoraForMaiorOuIgualA24() {
         Scanner scanner = new Scanner("segunda 24");
 
@@ -78,6 +84,7 @@ class Ex3Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a hora não for numérica")
     void deveLancarExcecaoQuandoHoraNaoForNumero() {
         Scanner scanner = new Scanner("segunda abc");
 

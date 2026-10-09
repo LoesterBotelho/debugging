@@ -6,17 +6,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.Locale;
 import java.util.Scanner;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.botelho.loester.exception.AlturaInvalidaException;
 import br.botelho.loester.exception.EntradaAlturaInvalidaException;
 import br.botelho.loester.exception.NenhumaAlturaInformadaException;
 
+@DisplayName("Testes do exercício de cálculo de média das alturas")
 class Ex1Test {
 
     private final Ex1 ex1 = new Ex1();
 
     @Test
+    @DisplayName("Deve calcular a média quando alturas válidas forem informadas")
     void deveCalcularMediaDasAlturas() {
 
         Scanner scanner = new Scanner(
@@ -27,6 +30,7 @@ class Ex1Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a altura for negativa")
     void deveLancarExcecaoQuandoAlturaForNegativa() {
 
         Scanner scanner = new Scanner(
@@ -40,6 +44,7 @@ class Ex1Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando a entrada não for numérica")
     void deveLancarExcecaoQuandoEntradaNaoForNumero() {
 
         Scanner scanner = new Scanner(
@@ -53,6 +58,7 @@ class Ex1Test {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção quando nenhuma altura for informada")
     void deveLancarExcecaoQuandoNenhumaAlturaForInformada() {
 
         Scanner scanner = new Scanner(
